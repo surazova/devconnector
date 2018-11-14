@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://master-workspace-cloned-surazova.c9users.io",
+  "proxy": "https://master-workspace-cloned-surazova.c9users.io:8081",
   "eslintConfig": {
     "extends": "react-app"
   },
