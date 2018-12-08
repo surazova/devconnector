@@ -16,12 +16,11 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=8082 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://master-workspace-cloned-surazova.c9users.io:8081",
   "eslintConfig": {
     "extends": "react-app"
   },
