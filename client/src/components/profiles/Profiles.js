@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import { getProfiles } from '../../actions/profileActions'; // Import action
+import ProfileItem from './ProfileItem';
 
 class Profiles extends Component {
 
@@ -24,7 +25,9 @@ class Profiles extends Component {
     else {
       if (profiles.length > 0) { // If there are no profiles 
         // The profiles are displayed if length is more than 0 
-        profileItems = <h1>PROFILES HERE</h1>
+        profileItems = profiles.map(profile => (
+          <ProfileItem key={profile._id} profile={profile}/>
+        ))
       }
       else {
         profileItems = <h4>No Profiles Found...</h4> // Message if there are no profiles found at all
