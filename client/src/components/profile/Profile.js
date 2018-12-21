@@ -17,13 +17,45 @@ class Profile extends Component {
     }
   }
   render() {
-    return (
-      <div>
-      <ProfileHeader />
+    const { profile, loading } = this.props.profile;
+    let profileContent;
+
+    if (profile === null || loading) {
+      profileContent = <Spinner />
+    }
+    else {
+      profileContent = (
+        <div>
+        <div className="row">
+          <div className="col-md-6">
+            <Link to="/profiles" className="btn btn-light mb-3 float-left">
+              Back to Profiles
+            </Link>
+          </div>
+          <div className="col-md-6" />
+        </div>
+        <div className="col-md-6" />
+              <div>
+      <ProfileHeader  profile={profile}/>
       <ProfileAbout />
       <ProfileCreds />
       <ProfileGitHub />
       </div>
+        </div>
+      )
+
+    }
+
+    return (
+      <div className="profile">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                  {ProfileContent}
+                  </div>
+                </div>
+              </div>
+            </div>
     );
   }
 }
