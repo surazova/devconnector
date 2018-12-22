@@ -45,4 +45,6 @@ class ProfileAbout extends Component {
   }
 }
 
+// Add it here from the 66th video 
+
 export default ProfileAbout;

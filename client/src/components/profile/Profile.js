@@ -21,36 +21,37 @@ class Profile extends Component {
     let profileContent;
 
     if (profile === null || loading) {
-      profileContent = <Spinner />
+      profileContent = <Spinner />;
     }
     else {
       profileContent = (
         <div>
-        <div className="row">
-          <div className="col-md-6">
-            <Link to="/profiles" className="btn btn-light mb-3 float-left">
-              Back to Profiles
-            </Link>
+          <div className="row">
+            <div className="col-md-6">
+              <Link to="/profiles" className="btn btn-light mb-3 float-left">
+                Back To Profiles
+              </Link>
+            </div>
+            <div className="col-md-6" />
           </div>
-          <div className="col-md-6" />
+          <ProfileHeader profile={profile} />
+          <ProfileAbout profile={profile} />
+          <ProfileCreds
+            education={profile.education}
+            experience={profile.experience}
+          />
+          {profile.githubusername ? (
+            <ProfileGithub username={profile.githubusername} />
+          ) : null}
         </div>
-        <div className="col-md-6" />
-              <div>
-      <ProfileHeader  profile={profile}/>
-      <ProfileAbout profile={profile}/>
-      <ProfileCreds education={profile.education} experience={profile.experience}/>
-      <ProfileGitHub />
-      </div>
-        </div>
-      )
-
+      );
     }
 
     return (
       <div className="profile">
               <div className="container">
                 <div className="row">
-                  <div className="col-md-12">
+                  <div classwName="col-md-12">
                   {ProfileContent}
                   </div>
                 </div>
