@@ -45,6 +45,8 @@ class ProfileAbout extends Component {
   }
 }
 
-// Add it here from the 66th video 
+ProfileAbout.propTyprd = {
+  profile: PropTypes.object.isRequired
+}
 
 export default ProfileAbout;
