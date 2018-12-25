@@ -48,7 +48,7 @@ export const getPosts = () => dispatch => { // asynch request, need dispatch
 }
 
 // Get Post
-export const getPost = () => dispatch => { // asynch request, need dispatch
+export const getPost = id => dispatch => { // asynch request, need dispatch
   dispatch(setPostLoading);
   axios
     .get(`/api/posts/${id}`) // not passing any data

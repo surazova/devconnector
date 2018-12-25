@@ -1,7 +1,7 @@
 // map through the posts that are passed in and then display a post item for each 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PostItem from './postItem'
+import PostItem from './PostItem'
 
 class PostFeed extends Component {
   render() {
