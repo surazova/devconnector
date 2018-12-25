@@ -1,5 +1,7 @@
 #project specific items
-config/
+config/keys_dev.js
+/node_modules
+package-lock.json
 
 # Logs
 logs
