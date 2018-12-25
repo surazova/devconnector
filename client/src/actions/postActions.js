@@ -46,8 +46,8 @@ export const getPost = () => dispatch => { // asynch request, need dispatch
 }
 
 // Set loading state
-export const setPostLoading = () = {
+export const setPostLoading = () => {
   return {
     type: POST_LOADING
-  }
-}
+  };
+};
