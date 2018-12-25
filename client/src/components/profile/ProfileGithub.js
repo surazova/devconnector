@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class ProfileGitHub extends Component {
-  constructor() {
+class ProfileGithub extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       clientId: '47cdbb7f6fe428b7939e',
