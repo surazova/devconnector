@@ -75,7 +75,7 @@ PostForm.propTypes = {
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 }
-const mapSateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 })

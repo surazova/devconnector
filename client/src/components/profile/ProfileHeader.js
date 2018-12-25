@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import isEmpty from '../../validation/isEmpty';
+import isEmpty from '../../validation/is-empty';
 
 class ProfileHeader extends Component {
   render() {
@@ -94,10 +94,6 @@ class ProfileHeader extends Component {
       </div>
     );
   }
-}
-
-)
-}
 }
 
 export default ProfileHeader;
