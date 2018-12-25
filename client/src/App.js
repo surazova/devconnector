@@ -5,8 +5,7 @@ import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
 
-
-import { Provider } from 'react-redux'; //A reaact component that provides application with the store, which holds the state
+import { Provider } from 'react-redux';
 import store from './store';
 
 import PrivateRoute from './components/common/PrivateRoute';
@@ -23,30 +22,29 @@ import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
-import Notfound from './components/not-found/Notfound';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+import Notfound from './components/not-found/Notfound';
 
 import './App.css';
 
-
-// Check for token 
+// Check for token
 if (localStorage.jwtToken) {
-  // set auth token header auth 
-  setAuthToken(localStorage.jwtToken); // Where token is stored
-  // Decode token and get user info and expiration 
+  // Set auth token header auth
+  setAuthToken(localStorage.jwtToken);
+  // Decode token and get user info and exp
   const decoded = jwt_decode(localStorage.jwtToken);
-  // Set user and isAuthenticated 
-  store.dispatch(setCurrentUser(decoded)); //Calls anything in the store 
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
 
-  // Check for expired token 
+  // Check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
-    // Logout user 
+    // Logout user
     store.dispatch(logoutUser());
-    // Clear current profile 
+    // Clear current Profile
     store.dispatch(clearCurrentProfile());
-    // Redirect to login 
+    // Redirect to login
     window.location.href = '/login';
   }
 }
@@ -54,42 +52,58 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={ store }>
-      <Router>
-      <div className="App">
-      <Navbar />
-        <Route exact path="/" component={ Landing } />
-        <div className="container">
-        <Route exact path="/register" component={ Register } />
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/profiles" component={ Profiles } />
-        <Route exact path="/profile/:handle" component={ Profile } />
-        <Switch>
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        </Switch>
-        <Switch>
-        <PrivateRoute exact path="/create-profile" component={CreateProfile} />
-        </Switch>
-        <Switch>
-        <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-        </Switch>
-        <Switch>
-        <PrivateRoute exact path="/add-experience" component={AddExperience} />
-        </Switch>
-        <Switch>
-        <PrivateRoute exact path="/add-education" component={AddEducation} />
-        <Switch>
-        <PrivateRoute exact path="/post/:id" component={Post} />
-        </Switch>
-        </Switch>
-        <Route exact path="/not-found" component={ Notfound } />
-        <Switch>
-        <PrivateRoute exact path="/feed" component={Posts} />
-        </Switch>
-        </div>
-        <Footer />
-      </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Route exact path="/" component={Landing} />
+            <div className="container">
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/profile/:handle" component={Profile} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/create-profile"
+                  component={CreateProfile}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-profile"
+                  component={EditProfile}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-experience"
+                  component={AddExperience}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/add-education"
+                  component={AddEducation}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
+              </Switch>
+              <Route exact path="/not-found" component={Notfound} />
+            </div>
+            <Footer />
+          </div>
+        </Router>
       </Provider>
     );
   }

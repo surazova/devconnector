@@ -7,13 +7,13 @@ const initialState = {
   user: {}
 };
 
-export default function(state = initialState, action) { //where testing happens
+export default function(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload // When a user logs out, an empty payload is passed and therefore is not valiated
+        user: action.payload
       };
     default:
       return state;
