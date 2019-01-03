@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import {
   GET_PROFILE,
@@ -7,14 +7,13 @@ import {
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
   SET_CURRENT_USER
-}
-from './types';
+} from "./types";
 
-// Get current profile 
+// Get current profile
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get('/api/profile')
+    .get("/api/profile")
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -30,7 +29,7 @@ export const getCurrentProfile = () => dispatch => {
 };
 
 // Get profile by handle
-export const getProfileByHandle = (handle) => dispatch => {
+export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
   axios
     .get(`/api/profile/handle/${handle}`)
@@ -47,47 +46,47 @@ export const getProfileByHandle = (handle) => dispatch => {
       })
     );
 };
-// Create profile 
+// Create profile
 export const createProfile = (profileData, history) => dispatch => {
   axios
-    .post('/api/profile', profileData)
-    .then(res => history.push('/dashboard'))
+    .post("/api/profile", profileData)
+    .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
-}
+};
 
-// Add Experience 
+// Add Experience
 export const addExperience = (expData, history) => dispatch => {
   axios
-    .post('/api/profile/experience', expData)
-    .then(res => history.push('/dashboard'))
+    .post("/api/profile/experience", expData)
+    .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
-}
+};
 
-// Add Education 
+// Add Education
 export const addEducation = (eduData, history) => dispatch => {
   axios
-    .post('/api/profile/education', eduData)
-    .then(res => history.push('/dashboard'))
+    .post("/api/profile/education", eduData)
+    .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
-}
+};
 
-// Delete Experience 
-export const deleteExperience = (id) => dispatch => {
+// Delete Experience
+export const deleteExperience = id => dispatch => {
   axios
     .delete(`/api/profile/experience/${id}`)
     .then(res =>
@@ -102,10 +101,10 @@ export const deleteExperience = (id) => dispatch => {
         payload: err.response.data
       })
     );
-}
+};
 
-// Delete Education 
-export const deleteEducation = (id) => dispatch => {
+// Delete Education
+export const deleteEducation = id => dispatch => {
   axios
     .delete(`/api/profile/education/${id}`)
     .then(res =>
@@ -120,13 +119,13 @@ export const deleteEducation = (id) => dispatch => {
         payload: err.response.data
       })
     );
-}
+};
 
-// Get all profiles 
+// Get all profiles
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get('/api/profile/all')
+    .get("/api/profile/all")
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -139,13 +138,13 @@ export const getProfiles = () => dispatch => {
         payload: null
       })
     );
-}
+};
 
 // Delete Account & Profile
 export const deleteAccount = () => dispatch => {
-  if (window.confirm('Are you sure? This can NOT be undone!')) {
+  if (window.confirm("Are you sure? This can NOT be undone!")) {
     axios
-      .delete('/api/profile')
+      .delete("/api/profile")
       .then(res =>
         dispatch({
           type: SET_CURRENT_USER,
@@ -161,16 +160,16 @@ export const deleteAccount = () => dispatch => {
   }
 };
 
-// Profile Loading 
+// Profile Loading
 export const setProfileLoading = () => {
   return {
-    type: PROFILE_LOADING // no payload needed 
+    type: PROFILE_LOADING // no payload needed
   };
 };
 
 // Clear profile
 export const clearCurrentProfile = () => {
   return {
-    type: CLEAR_CURRENT_PROFILE // no payload needed 
-  }
-}
+    type: CLEAR_CURRENT_PROFILE // no payload needed
+  };
+};
