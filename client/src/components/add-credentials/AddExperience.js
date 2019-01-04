@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import TextFieldGroup from '../common/TextFieldGroup';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { addExperience } from '../../actions/profileActions';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import TextFieldGroup from "../common/TextFieldGroup";
+import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addExperience } from "../../actions/profileActions";
 
 class AddExperience extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      company: '',
-      title: '',
-      location: '',
-      from: '',
-      to: '',
+      company: "",
+      title: "",
+      location: "",
+      from: "",
+      to: "",
       current: false,
-      description: '',
+      description: "",
       errors: {},
       disabled: false
     };
-
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -28,14 +27,14 @@ class AddExperience extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.erorrs) {
+    if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
+
   onSubmit(e) {
     e.preventDefault();
 
-    console.log('submit');
     const expData = {
       company: this.state.company,
       title: this.state.title,
@@ -44,19 +43,16 @@ class AddExperience extends Component {
       to: this.state.to,
       current: this.state.current,
       description: this.state.description
-    }
+    };
 
     this.props.addExperience(expData, this.props.history);
   }
 
   onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onCheck(e) {
-    // change the disabled state and change current to the oposite of what it is
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
@@ -64,82 +60,87 @@ class AddExperience extends Component {
   }
 
   render() {
-    const { errors } = this.state; //destructuring
+    const { errors } = this.state;
 
     return (
       <div className="add-experience">
         <div className="container">
           <div className="row">
-            <div className="col-md-89 m-auto">
+            <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-              Go Back
+                Go Back
               </Link>
-              <h1 className="display-4 text-center"> Add Experience </h1>
-              <p className="lead text-center"> Add any job or positiont that you ahve ahad in the past or current</p>
+              <h1 className="display-4 text-center">Add Experience</h1>
+              <p className="lead text-center">
+                Add any job or position that you have had in the past or current
+              </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup 
+                <TextFieldGroup
                   placeholder="* Company"
                   name="company"
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
-                  />
+                />
                 <TextFieldGroup
                   placeholder="* Job Title"
                   name="title"
                   value={this.state.title}
                   onChange={this.onChange}
                   error={errors.title}
-                  />
+                />
                 <TextFieldGroup
                   placeholder="Location"
                   name="location"
-                  valuee={this.state.location}
+                  value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
-                  />
-                  <h6>From Date</h6>
-                  <TextFieldGroup
+                />
+                <h6>From Date</h6>
+                <TextFieldGroup
                   name="from"
                   type="date"
                   value={this.state.from}
                   onChange={this.onChange}
                   error={errors.from}
-                  />
-                  <h6>To Date</h6>
-                  <TextFieldGroup
+                />
+                <h6>To Date</h6>
+                <TextFieldGroup
                   name="to"
                   type="date"
                   value={this.state.to}
                   onChange={this.onChange}
                   error={errors.to}
-                  disabled={this.state.disabled ? 'disabled' : ''}
-                  />
-                  <div className="form-check mb-4">
-                  <input 
-                  type="checkbox"
-                  className="form-check-input"
-                  name="current"
-                  value={this.state.current}
-                  checked={this.state.current}
-                  onChange={this.onCheck}
-                  id="current"
+                  disabled={this.state.disabled ? "disabled" : ""}
+                />
+                <div className="form-check mb-4">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    name="current"
+                    value={this.state.current}
+                    checked={this.state.current}
+                    onChange={this.onCheck}
+                    id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
-                  Current Job
+                    Current Job
                   </label>
-                  </div>
-                  <TextAreaFieldGroup
-                    placeholder="Job Description"
-                    name="description"
-                    value={this.state.description}
-                    onChange={this.onChange}
-                    error={errors.description}
-                    info="Tell us about the position"
-                    />
-                    <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"
-                    />
+                </div>
+                <TextAreaFieldGroup
+                  placeholder="Job Description"
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.onChange}
+                  error={errors.description}
+                  info="Tell us about the the position"
+                />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-info btn-block mt-4"
+                />
               </form>
             </div>
           </div>
@@ -153,12 +154,14 @@ AddExperience.propTypes = {
   addExperience: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   profile: state.profile,
   errors: state.errors
 });
 
-
-export default connect(mapStateToProps, { addExperience })(withRouter(AddExperience)); // withRouter for redirect
+export default connect(
+  mapStateToProps,
+  { addExperience }
+)(withRouter(AddExperience));

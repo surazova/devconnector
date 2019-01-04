@@ -9,11 +9,10 @@ import SelectListGroup from "../common/SelectListGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 
-// Constructor
 class CreateProfile extends Component {
   constructor(props) {
     super(props);
-    this.stte = {
+    this.state = {
       displaySocialInputs: false,
       handle: "",
       company: "",
@@ -38,6 +37,7 @@ class CreateProfile extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -46,8 +46,8 @@ class CreateProfile extends Component {
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
-      // Bring skills array back to CSV (comma seperated value)
-      const skillsCSV = profile.skills.join(","); //seperates each value with a comma
+      // Bring skills array back to CSV
+      const skillsCSV = profile.skills.join(",");
 
       // If profile field doesnt exist, make empty string
       profile.company = !isEmpty(profile.company) ? profile.company : "";
@@ -116,15 +116,13 @@ class CreateProfile extends Component {
   }
 
   onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
     const { errors, displaySocialInputs } = this.state;
 
-    let socialInputs; // initlaizes it
+    let socialInputs;
 
     if (displaySocialInputs) {
       socialInputs = (
@@ -179,7 +177,7 @@ class CreateProfile extends Component {
 
     // Select options for status
     const options = [
-      { label: "* Select Professional Status", value: 0 }, // * means required
+      { label: "* Select Professional Status", value: 0 },
       { label: "Developer", value: "Developer" },
       { label: "Junior Developer", value: "Junior Developer" },
       { label: "Senior Developer", value: "Senior Developer" },
@@ -189,6 +187,7 @@ class CreateProfile extends Component {
       { label: "Intern", value: "Intern" },
       { label: "Other", value: "Other" }
     ];
+
     return (
       <div className="create-profile">
         <div className="container">
@@ -197,7 +196,7 @@ class CreateProfile extends Component {
               <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link>
-              <h1 className="display-4 text-center"> Edit Profile </h1>
+              <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -209,7 +208,7 @@ class CreateProfile extends Component {
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
                 <SelectListGroup
-                  placeholder="* Status"
+                  placeholder="Status"
                   name="status"
                   value={this.state.status}
                   onChange={this.onChange}
@@ -242,12 +241,13 @@ class CreateProfile extends Component {
                   info="City or city & state suggested (eg. Boston, MA)"
                 />
                 <TextFieldGroup
-                  placeholder="Skills"
+                  placeholder="* Skills"
                   name="skills"
                   value={this.state.skills}
                   onChange={this.onChange}
                   error={errors.skills}
-                  info="Please use comman seperated values (eg. HTML, CSS< JavaScript, PHP"
+                  info="Please use comma separated values (eg.
+                    HTML,CSS,JavaScript,PHP"
                 />
                 <TextFieldGroup
                   placeholder="Github Username"
@@ -255,7 +255,7 @@ class CreateProfile extends Component {
                   value={this.state.githubusername}
                   onChange={this.onChange}
                   error={errors.githubusername}
-                  info="if you want your latest repos and a Github link include your username"
+                  info="If you want your latest repos and a Github link, include your username"
                 />
                 <TextAreaFieldGroup
                   placeholder="Short Bio"
@@ -284,7 +284,7 @@ class CreateProfile extends Component {
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-warning btn-block mt-4"
+                  className="btn btn-info btn-block mt-4"
                 />
               </form>
             </div>
@@ -296,10 +296,10 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
