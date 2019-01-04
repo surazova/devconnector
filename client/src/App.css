@@ -37,3 +37,19 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+/*Color Inversion */
+
+:root {
+  background-color: #fefefe;
+  filter: invert(100%);
+}
+
+* {
+  background-color: inherit;
+}
+
+/* Double invert images so that they dont become negatives*/
+img:not([src*=".jpg"]) {
+  filter: invert(100%);
+}
