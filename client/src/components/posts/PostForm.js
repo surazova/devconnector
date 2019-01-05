@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import { addPost } from '../../actions/postActions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+import { addPost } from "../../actions/postActions";
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      text: "",
       errors: {}
-    }
-
+    };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,7 +18,7 @@ class PostForm extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.errors) {
-      this.setState({ errors: newProps.errors })
+      this.setState({ errors: newProps.errors });
     }
   }
 
@@ -31,19 +30,20 @@ class PostForm extends Component {
     const newPost = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar // insert into post
-    }
+      avatar: user.avatar
+    };
+
     this.props.addPost(newPost);
-    this.setState({ text: '' }); // clears the text field
+    this.setState({ text: "" });
   }
 
   onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   }
+
   render() {
-    const { errors } = this.state
+    const { errors } = this.state;
+
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
@@ -66,7 +66,7 @@ class PostForm extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -74,10 +74,14 @@ PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
-})
+});
 
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(
+  mapStateToProps,
+  { addPost }
+)(PostForm);

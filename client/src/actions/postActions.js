@@ -1,21 +1,20 @@
-import axios from 'axios'; //because you are making a request 
+import axios from "axios";
 
 import {
   ADD_POST,
   GET_ERRORS,
   CLEAR_ERRORS,
   GET_POSTS,
+  GET_POST,
   POST_LOADING,
-  DELETE_POST,
-  GET_POST
-}
-from './types';
+  DELETE_POST
+} from "./types";
 
-// Add Post 
-export const addPost = postData => dispatch => { // asynch request, need dispatch
+// Add Post
+export const addPost = postData => dispatch => {
   dispatch(clearErrors());
   axios
-    .post('/api/posts', postData)
+    .post("/api/posts", postData)
     .then(res =>
       dispatch({
         type: ADD_POST,
@@ -27,14 +26,14 @@ export const addPost = postData => dispatch => { // asynch request, need dispatc
         type: GET_ERRORS,
         payload: err.response.data
       })
-    )
-}
+    );
+};
 
-// Get Posts 
-export const getPosts = () => dispatch => { // asynch request, need dispatch
-  dispatch(setPostLoading);
+// Get Posts
+export const getPosts = () => dispatch => {
+  dispatch(setPostLoading());
   axios
-    .get('/api/posts') // not passing any data
+    .get("/api/posts")
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -46,14 +45,14 @@ export const getPosts = () => dispatch => { // asynch request, need dispatch
         type: GET_POSTS,
         payload: null
       })
-    )
-}
+    );
+};
 
 // Get Post
-export const getPost = id => dispatch => { // asynch request, need dispatch
-  dispatch(setPostLoading);
+export const getPost = id => dispatch => {
+  dispatch(setPostLoading());
   axios
-    .get(`/api/posts/${id}`) // not passing any data
+    .get(`/api/posts/${id}`)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -62,11 +61,11 @@ export const getPost = id => dispatch => { // asynch request, need dispatch
     )
     .catch(err =>
       dispatch({
-        type: GET_POSTS,
+        type: GET_POST,
         payload: null
       })
-    )
-}
+    );
+};
 
 // Delete Post
 export const deletePost = id => dispatch => {
@@ -83,40 +82,40 @@ export const deletePost = id => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    )
-}
+    );
+};
 
 // Add Like
 export const addLike = id => dispatch => {
   axios
-    .post(`/api/posts/likes/${id}`)
+    .post(`/api/posts/like/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
-    )
-}
+    );
+};
 
 // Remove Like
 export const removeLike = id => dispatch => {
   axios
-    .post(`/api/posts/likes/${id}`)
+    .post(`/api/posts/unlike/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
-    )
-}
+    );
+};
 
-// Add Comment 
+// Add Comment
 export const addComment = (postId, commentData) => dispatch => {
   dispatch(clearErrors());
   axios
-    .post(`/api/posts/comments/${postId}`, commentData)
+    .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -128,13 +127,13 @@ export const addComment = (postId, commentData) => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    )
-}
+    );
+};
 
-// Delete Comment 
+// Delete Comment
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
-    .delete(`/api/posts/comments/${postId}/${commentId}`)
+    .delete(`/api/posts/comment/${postId}/${commentId}`)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -146,8 +145,8 @@ export const deleteComment = (postId, commentId) => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    )
-}
+    );
+};
 
 // Set loading state
 export const setPostLoading = () => {

@@ -20,7 +20,7 @@ class Landing extends Component {
                 <h1 className="display-3 mb-4">PlugIn</h1>
                 <p className="lead">
                   {" "}
-                  A social netwrok for creating a developer profile and
+                  A social network for creating a developer profile and
                   portfolio. Share posts, get feedback from other developers,
                   and more.
                 </p>

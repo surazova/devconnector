@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { Link } from 'react-router-dom';
-import { deletePost, addLike, removeLike } from '../../actions/postActions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { Link } from "react-router-dom";
+import { deletePost, addLike, removeLike } from "../../actions/postActions";
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -22,14 +22,12 @@ class PostItem extends Component {
     const { auth } = this.props;
     if (likes.filter(like => like.user === auth.user.id).length > 0) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   render() {
-    // Pull post, auth, and showActions out of props
     const { post, auth, showActions } = this.props;
 
     return (
@@ -56,8 +54,8 @@ class PostItem extends Component {
                   className="btn btn-light mr-1"
                 >
                   <i
-                    className={classnames('fas fa-thumbs-up', {
-                      'text-info': this.findUserLike(post.likes)
+                    className={classnames("fas fa-thumbs-up", {
+                      "text-info": this.findUserLike(post.likes)
                     })}
                   />
                   <span className="badge badge-light">{post.likes.length}</span>
@@ -106,6 +104,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deletePost, addLike, removeLike })(
-  PostItem
-);
+export default connect(
+  mapStateToProps,
+  { deletePost, addLike, removeLike }
+)(PostItem);

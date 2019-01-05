@@ -46,7 +46,8 @@ export const getProfileByHandle = handle => dispatch => {
       })
     );
 };
-// Create profile
+
+// Create Profile
 export const createProfile = (profileData, history) => dispatch => {
   axios
     .post("/api/profile", profileData)
@@ -59,7 +60,7 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
-// Add Experience
+// Add experience
 export const addExperience = (expData, history) => dispatch => {
   axios
     .post("/api/profile/experience", expData)
@@ -72,7 +73,7 @@ export const addExperience = (expData, history) => dispatch => {
     );
 };
 
-// Add Education
+// Add education
 export const addEducation = (eduData, history) => dispatch => {
   axios
     .post("/api/profile/education", eduData)
@@ -140,7 +141,7 @@ export const getProfiles = () => dispatch => {
     );
 };
 
-// Delete Account & Profile
+// Delete account & profile
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you sure? This can NOT be undone!")) {
     axios
@@ -160,16 +161,16 @@ export const deleteAccount = () => dispatch => {
   }
 };
 
-// Profile Loading
+// Profile loading
 export const setProfileLoading = () => {
   return {
-    type: PROFILE_LOADING // no payload needed
+    type: PROFILE_LOADING
   };
 };
 
 // Clear profile
 export const clearCurrentProfile = () => {
   return {
-    type: CLEAR_CURRENT_PROFILE // no payload needed
+    type: CLEAR_CURRENT_PROFILE
   };
 };
