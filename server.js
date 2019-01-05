@@ -38,9 +38,10 @@ app.use("/api/posts", posts);
 // Server static assets if in production
 // For Heroku (production build)
 if (process.env.NODE_ENV === "production") {
-  // Set static folder
+  // Set static folder if in production mode
   app.use(express.static("client/build"));
 
+  // create route and load the index.html file from build folder
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
