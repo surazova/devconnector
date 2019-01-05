@@ -27,7 +27,7 @@ import Post from "./components/post/Post";
 import Notfound from "./components/not-found/Notfound";
 
 //Theme Switch
-import ThemeSwitch from "./components/ThemeSwitch";
+//import ThemeSwitch from "./components/ThemeSwitch";
 
 import "./App.css";
 
@@ -105,7 +105,6 @@ class App extends Component {
               <Route exact path="/not-found" component={Notfound} />
             </div>
             <Footer />
-            <ThemeSwitch />
           </div>
         </Router>
       </Provider>
