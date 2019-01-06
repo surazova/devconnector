@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class ProfileGithub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clientId: '47cdbb7f6fe428b7939e',
-      clientSecret: 'e9013bbc28b7228d06e60b0d09d89430e8659c18',
+      clientId: "26c196bacea7db10cf48",
+      clientSecret: "0885cb690e07d2a93a6afb0891fb552fd9f7aa53",
       count: 5,
-      sort: 'created: asc',
+      sort: "created: asc",
       repos: []
-    }
+    };
   }
+
   componentDidMount() {
     const { username } = this.props;
     const { count, sort, clientId, clientSecret } = this.state;
 
     fetch(
-        `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`
-      )
+      `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`
+    )
       .then(res => res.json())
       .then(data => {
         if (this.refs.myRef) {
