@@ -2,6 +2,8 @@ Sitora Urazova </br>
 PlugIn: A Social Network for Developers </br>
 MERN - stack focused and launched with Heroku </br>
 
+<strong>Access the site here: https://fierce-everglades-83104.herokuapp.com/ <strong>
+
 
 
 </br>
